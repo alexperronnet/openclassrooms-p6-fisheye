@@ -7,8 +7,7 @@ export default defineConfig({
       '@data': resolve(__dirname, './src/data'),
       '@controllers': resolve(__dirname, './src/scripts/controllers'),
       '@models': resolve(__dirname, './src/scripts/models'),
-      '@views-components': resolve(__dirname, './src/scripts/views/components'),
-      '@views-pages': resolve(__dirname, './src/scripts/views/pages'),
+      '@views': resolve(__dirname, './src/scripts/views'),
       '@styles': resolve(__dirname, './src/styles')
     }
   }

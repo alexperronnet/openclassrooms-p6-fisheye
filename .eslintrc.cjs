@@ -16,8 +16,7 @@ module.exports = {
           ['@data', './src/data'],
           ['@controllers', './src/scripts/controllers'],
           ['@models', './src/scripts/models'],
-          ['@views-components', './src/scripts/views/components'],
-          ['@views-pages', './src/scripts/views/pages'],
+          ['@views', './src/scripts/views'],
           ['@styles', './src/styles']
         ]
       }
