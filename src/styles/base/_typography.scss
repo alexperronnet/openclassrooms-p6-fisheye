@@ -1,0 +1,17 @@
+// Create DM Sans - regular
+@font-face {
+  font-family: 'DM Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: local('dm-sans-400'), url('/fonts/dm-sans-400.woff2') format('woff2'),
+    url('/fonts/dm-sans-400.woff') format('woff');
+}
+
+// Create DM Sans - bold
+@font-face {
+  font-family: 'DM Sans';
+  font-style: normal;
+  font-weight: 700;
+  src: local('dm-sans-700'), url('/fonts/dm-sans-700.woff2') format('woff2'),
+    url('/fonts/dm-sans-700.woff') format('woff');
+}

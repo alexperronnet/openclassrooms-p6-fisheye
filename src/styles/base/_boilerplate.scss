@@ -1,0 +1,20 @@
+// Use abstracts
+@use '@styles/abstracts/variables' as *;
+
+body {
+  max-width: 80rem;
+  width: calc(100% - (2rem * 2));
+  margin-inline: auto;
+  background-color: $color-white;
+  color: darken($color-gray, 30%);
+  font-family: $font-sans;
+
+  @media (max-width: $screen-sm) {
+    width: calc(100% - (1.5rem * 2));
+  }
+}
+
+::selection {
+  background-color: lighten($color-red, 10%);
+  color: $color-white;
+}
