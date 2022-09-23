@@ -1,0 +1,26 @@
+// Use abstracts
+@use '@styles/abstracts/variables' as *;
+
+@mixin button {
+  text-decoration: none;
+  background-color: $color-red;
+  color: $color-white;
+  border-radius: $border-radius;
+  padding: 1.25rem 1.5rem;
+  transition: $transition;
+  transition-property: background-color;
+
+  &:hover {
+    background-color: lighten($color-red, 10%);
+  }
+
+  &:focus-visible {
+    outline: 0.2rem solid rgba($color-red, 0.5);
+    outline-offset: 0.2rem;
+  }
+
+  @media (max-width: $screen-sm) {
+    padding: 1rem 0.75rem;
+    font-size: 0.875rem;
+  }
+}

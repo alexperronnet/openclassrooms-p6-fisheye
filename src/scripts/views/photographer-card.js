@@ -15,6 +15,7 @@ export default function PhotographerCard(useData) {
       href="/${useData.slug}"
       class="photographer-card__link"
       title="Voir le profil de ${useData.name}"
+      aria-label="Voir le profil de ${useData.name}"
     >
       <div class="photographer-card__image-wrapper">
         <img
