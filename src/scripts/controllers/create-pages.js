@@ -2,7 +2,7 @@
 import { HomeMain, PhotographerMain, NotFoundMain } from '@views'
 
 // Create all pages
-export default function createPages() {
+export default function createPages(useData) {
   // Generate the page
   const generatePage = (mainContent, title) => {
     // Get the main element
@@ -25,16 +25,23 @@ export default function createPages() {
 
   // Generate the home page
   if (window.location.pathname === '/') {
-    generatePage(HomeMain(), 'Accueil')
+    return generatePage(HomeMain(useData), 'Accueil')
   }
 
-  // Generate the photographer page
-  if (window.location.pathname.includes('/photographer')) {
-    generatePage(PhotographerMain(), 'Photographe')
+  // Generate the photographer page for each photographer
+  if (window.location.pathname.includes('/')) {
+    // Get the photographer slug
+    const slug = window.location.pathname.split('/')[1]
+
+    // Get the photographer data
+    const photographer = useData.find(photographer => photographer.slug === slug)
+
+    // Check if the photographer exists
+    if (photographer) {
+      return generatePage(PhotographerMain(photographer), photographer.name)
+    }
   }
 
   // Generate the 404 page if no page is found
-  if (!window.location.pathname.includes('/photographer') && window.location.pathname !== '/') {
-    generatePage(NotFoundMain(), 'Page introuvable')
-  }
+  return generatePage(NotFoundMain(), 'Page introuvable')
 }

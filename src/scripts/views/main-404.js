@@ -9,8 +9,6 @@ export default function NotFoundMain() {
 
     <ul>
       <li><a href="/">Accueil</a></li>
-      <li><a href="/photographer">Photographe</a></li>
-      <li><a href="/not-found">404</a></li>
     </ul>
   `
 
