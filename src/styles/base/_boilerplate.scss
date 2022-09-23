@@ -6,7 +6,7 @@ body {
   width: calc(100% - (2rem * 2));
   margin-inline: auto;
   background-color: $color-white;
-  color: darken($color-gray, 30%);
+  color: $color-gray-dark;
   font-family: $font-sans;
 
   @media (max-width: $screen-sm) {

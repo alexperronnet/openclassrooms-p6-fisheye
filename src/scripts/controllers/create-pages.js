@@ -1,10 +1,19 @@
 // Import needed views
-import { HomeMain, PhotographerMain, NotFoundMain } from '@views'
+import { Header, HomeMain, PhotographerMain, NotFoundMain } from '@views'
 
 // Create all pages
 export default function createPages(useData) {
   // Generate the page
   const generatePage = (mainContent, title) => {
+    // Get the header element
+    const header = document.querySelector('header')
+
+    // Clear the header element
+    header.innerHTML = ''
+
+    // Append the header
+    header.appendChild(Header())
+
     // Get the main element
     const main = document.querySelector('main')
 

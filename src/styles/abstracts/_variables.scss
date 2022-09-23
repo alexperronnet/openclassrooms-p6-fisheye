@@ -1,8 +1,11 @@
 // Colors
 $color-white: #fff;
-$color-gray: #6e7781;
-$color-red: #cf222e;
-$color-coral: #c4432b;
+$color-black: #000;
+$color-gray: #525252;
+$color-gray-light: #fafafa;
+$color-gray-dark: #312e2e;
+$color-red: #901c1c;
+$color-coral: #db8876;
 
 // Typography
 $font-sans: 'DM Sans', sans-serif;
@@ -15,3 +18,6 @@ $screen-xl: 1280px;
 
 // Border radius
 $border-radius: 0.5rem;
+
+// Transition
+$transition: 150ms ease-in-out;
