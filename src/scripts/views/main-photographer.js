@@ -1,3 +1,6 @@
+// Import needed views
+import { PhotographerHeader } from '@views'
+
 // Create the main photographer view
 export default function PhotographerMain(useData) {
   // Get the main element
@@ -5,14 +8,10 @@ export default function PhotographerMain(useData) {
 
   // Add the main content
   main.innerHTML = `
-    <h1>
-      ${useData.name}
-    </h1>
-
-    <ul>
-      <li><a href="/">Accueil</a></li>
-      <li><a href="/not-found">404</a></li>
-    </ul>
+    ${
+      // Create the photographer header
+      PhotographerHeader(useData)
+    }
   `
 
   // Return the main element

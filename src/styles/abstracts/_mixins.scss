@@ -1,12 +1,14 @@
 // Use abstracts
 @use '@styles/abstracts/variables' as *;
 
-@mixin button {
+@mixin button($bp: $screen-sm) {
   text-decoration: none;
   background-color: $color-red;
   color: $color-white;
   border-radius: $border-radius;
   padding: 1.25rem 1.5rem;
+  border: none;
+  cursor: pointer;
   transition: $transition;
   transition-property: background-color;
 
@@ -19,7 +21,7 @@
     outline-offset: 0.2rem;
   }
 
-  @media (max-width: $screen-sm) {
+  @media (max-width: $bp) {
     padding: 1rem 0.75rem;
     font-size: 0.875rem;
   }

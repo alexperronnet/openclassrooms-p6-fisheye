@@ -1,16 +1,16 @@
 // Create the photographer card view
 export default function PhotographerCard(useData) {
-  // Create an article element
-  const article = document.createElement('article')
+  // Create a template
+  const template = document.createElement('article')
 
-  // Add a class to the article element
-  article.classList.add('photographer-card')
+  // Add a class to the template
+  template.classList.add('photographer-card')
 
-  // Add an id to the article element
-  article.id = useData.id
+  // Add an id to the template
+  template.id = useData.id
 
-  // Add the photographer card content
-  article.innerHTML = `
+  // Create content for the template
+  template.innerHTML = `
     <a
       href="/${useData.slug}"
       class="photographer-card__link"
@@ -34,5 +34,5 @@ export default function PhotographerCard(useData) {
   `
 
   // Return the template content
-  return article.outerHTML
+  return template.outerHTML
 }
