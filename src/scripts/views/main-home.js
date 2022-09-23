@@ -1,30 +1,27 @@
+// Import needed views
+import { PhotographerCard } from '@views'
+
 // Create the main home view
 export default function HomeMain(useData) {
-  // Create the template
-  const template = document.createElement('template')
+  // Get the main element
+  const main = document.querySelector('main')
 
-  // Create the template content
-  template.innerHTML = `
-    <h1>Home</h1>
-
-    <ul>
-      ${useData
-        .map(
-          photographer => `
-        <li>
-          <a href="/${photographer.slug}">
-            ${photographer.name}
-          </a>
-        </li>
-      `
-        )
-        .join('')}
-        <li>
-          <a href="/test">404</a>
-        </li>
-    </ul>
+  // Add the main content
+  main.innerHTML = `
+    <section class="photographers-grid">
+      ${
+        // Create a photographer
+        useData
+          // Sort the photographers by id
+          .sort((a, b) => a.id - b.id)
+          // Create a photographer card for each photographer
+          .map(photographer => PhotographerCard(photographer))
+          // Join the photographer cards
+          .join('')
+      }
+    </section>
   `
 
-  // Return the template content
-  return template.content.cloneNode(true)
+  // Return the main element
+  return main.outerHTML
 }

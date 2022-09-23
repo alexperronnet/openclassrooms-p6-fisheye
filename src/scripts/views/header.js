@@ -1,13 +1,13 @@
 // Create the header view
 export default function Header() {
-  // Create the template
-  const template = document.createElement('template')
+  // Get the header element
+  const header = document.querySelector('header')
 
   // Get the default URL
   const defaultUrl = window.location.pathname === '/'
 
   // Create the template content
-  template.innerHTML = `
+  header.innerHTML = `
     <a href="/" class="header__link">
       <svg
         fill="none"
@@ -26,6 +26,6 @@ export default function Header() {
     ${defaultUrl ? '<h1 class="header__title">Nos photographes</h1>' : ''}
   `
 
-  // Return the template content
-  return template.content.cloneNode(true)
+  // Return the header element
+  return header.outerHTML
 }

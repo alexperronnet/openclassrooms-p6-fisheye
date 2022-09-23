@@ -4,24 +4,15 @@ import { Header, HomeMain, PhotographerMain, NotFoundMain } from '@views'
 // Create all pages
 export default function createPages(useData) {
   // Generate the page
-  const generatePage = (mainContent, title) => {
-    // Get the header element
-    const header = document.querySelector('header')
+  const GeneratePage = (mainContent, title) => {
+    // Get the app element
+    const app = document.querySelector('#app')
 
-    // Clear the header element
-    header.innerHTML = ''
+    // Add the header
+    app.innerHTML = Header()
 
-    // Append the header
-    header.appendChild(Header())
-
-    // Get the main element
-    const main = document.querySelector('main')
-
-    // Clear the main element
-    main.innerHTML = ''
-
-    // Append the main content
-    main.appendChild(mainContent)
+    // Add the main content
+    app.innerHTML += mainContent
 
     // Update title document
     document.title = title + ' — FishEye'
@@ -34,7 +25,7 @@ export default function createPages(useData) {
 
   // Generate the home page
   if (window.location.pathname === '/') {
-    return generatePage(HomeMain(useData), 'Accueil')
+    return GeneratePage(HomeMain(useData), 'Accueil')
   }
 
   // Generate the photographer page for each photographer
@@ -47,10 +38,10 @@ export default function createPages(useData) {
 
     // Check if the photographer exists
     if (photographer) {
-      return generatePage(PhotographerMain(photographer), photographer.name)
+      return GeneratePage(PhotographerMain(photographer), photographer.name)
     }
   }
 
   // Generate the 404 page if no page is found
-  return generatePage(NotFoundMain(), 'Page introuvable')
+  return GeneratePage(NotFoundMain(), 'Page introuvable')
 }

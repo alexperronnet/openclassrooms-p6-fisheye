@@ -1,10 +1,10 @@
 // Create the main photographer view
 export default function PhotographerMain(useData) {
-  // Create the template
-  const template = document.createElement('template')
+  // Get the main element
+  const main = document.querySelector('main')
 
-  // Create the template content
-  template.innerHTML = `
+  // Add the main content
+  main.innerHTML = `
     <h1>
       ${useData.name}
     </h1>
@@ -15,6 +15,6 @@ export default function PhotographerMain(useData) {
     </ul>
   `
 
-  // Return the template content
-  return template.content.cloneNode(true)
+  // Return the main element
+  return main.outerHTML
 }

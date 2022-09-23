@@ -1,10 +1,10 @@
 // Create the main 404 view
 export default function NotFoundMain() {
-  // Create the template
-  const template = document.createElement('template')
+  // Get the main element
+  const main = document.querySelector('main')
 
-  // Create the template content
-  template.innerHTML = `
+  // Add the main content
+  main.innerHTML = `
     <h1>404</h1>
 
     <ul>
@@ -12,6 +12,6 @@ export default function NotFoundMain() {
     </ul>
   `
 
-  // Return the template content
-  return template.content.cloneNode(true)
+  // Return the main element
+  return main.outerHTML
 }
