@@ -3,11 +3,11 @@ import { Header, MainHome, Main404, MainPhotographer } from '@views'
 
 // Create all pages
 export default function createPages(useData) {
+  // Get the app element
+  const app = document.querySelector('#app')
+
   // Generate the page
   const GeneratePage = (mainContent, title) => {
-    // Get the app element
-    const app = document.querySelector('#app')
-
     // Clear the app element
     app.textContent = ''
 
@@ -23,24 +23,39 @@ export default function createPages(useData) {
     document.querySelector('meta[property="twitter:title"]').setAttribute('content', document.title)
   }
 
+  // If the page is the home page
   if (window.location.pathname === '/') {
-    return GeneratePage(MainHome(useData), 'Accueil')
+    // Generate the home page
+    GeneratePage(MainHome(useData), 'Accueil')
   }
 
-  // Generate the photographer page for each photographer
-  if (window.location.pathname.includes('/')) {
+  // If the page is a photographer page
+  else if (window.location.pathname.includes('/')) {
     // Get the photographer slug
     const slug = window.location.pathname.split('/')[1]
 
     // Get the photographer data
-    const photographer = useData.find(photographer => photographer.slug === slug)
+    const photographerData = useData.find(photographer => photographer.slug === slug)
 
-    // Check if the photographer exists
-    if (photographer) {
-      return GeneratePage(MainPhotographer(photographer), photographer.name)
+    // If the photographer exists
+    if (photographerData) {
+      // Generate the photographer page
+      GeneratePage(MainPhotographer(photographerData), photographerData.name)
+    }
+
+    // If the photographer doesn't exist
+    else {
+      // Generate the 404 page
+      GeneratePage(Main404(), '404')
     }
   }
 
-  // Generate the 404 page if no page is found
-  return GeneratePage(Main404(), 'Page introuvable')
+  // If the page is not found
+  else {
+    // Generate the 404 page
+    GeneratePage(Main404(), '404')
+  }
+
+  // Return the page
+  return app
 }
