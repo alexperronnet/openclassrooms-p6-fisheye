@@ -1,0 +1,45 @@
+// Use abstracts
+@import '@styles/abstracts/variables';
+
+.photographer-aside {
+  background-color: $color-coral;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: fixed;
+  bottom: 0;
+  right: -10rem;
+  max-width: 20rem;
+  width: 100%;
+  padding: 1.25rem;
+  border-radius: 0.375rem 0.375rem 0 0;
+  transition: $transition;
+  transition-property: right;
+  font-size: 1.25rem;
+
+  @media (max-width: $screen-md) {
+    display: none;
+  }
+}
+
+.photographer-aside:hover {
+  right: 2rem;
+}
+
+.photographer-aside__likes {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.photographer-aside__likes-count {
+  font-weight: 700;
+}
+
+.photographer-aside__likes-icon {
+  height: 1.5rem;
+  aspect-ratio: 1 / 1;
+}
+
+.photographer-aside__price {
+}
