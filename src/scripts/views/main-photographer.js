@@ -1,5 +1,5 @@
 // Import needed views
-import { PhotographerHeader } from '@views'
+import { PhotographerHeader, PhotographerMedias } from '@views'
 
 // Create the main photographer view
 export default function PhotographerMain(useData) {
@@ -9,8 +9,13 @@ export default function PhotographerMain(useData) {
   // Add the main content
   main.innerHTML = `
     ${
-      // Create the photographer header
+      // Add the photographer header
       PhotographerHeader(useData)
+    }
+
+    ${
+      // Add the photographer medias
+      PhotographerMedias(useData)
     }
   `
 
