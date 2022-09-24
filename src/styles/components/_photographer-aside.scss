@@ -8,22 +8,16 @@
   justify-content: space-between;
   position: fixed;
   bottom: 0;
-  right: -10rem;
+  right: 2rem;
   max-width: 20rem;
   width: 100%;
   padding: 1.25rem;
   border-radius: 0.375rem 0.375rem 0 0;
-  transition: $transition;
-  transition-property: right;
   font-size: 1.25rem;
 
   @media (max-width: $screen-md) {
     display: none;
   }
-}
-
-.photographer-aside:hover {
-  right: 2rem;
 }
 
 .photographer-aside__likes {
