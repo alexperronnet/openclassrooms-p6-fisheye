@@ -2,7 +2,7 @@
 import { Header, MainHome, Main404, MainPhotographer } from '@views'
 
 // Create all pages
-export default function createPages(useData) {
+export default function createPages(data) {
   // Get the app element
   const app = document.querySelector('#app')
 
@@ -26,7 +26,7 @@ export default function createPages(useData) {
   // If the page is the home page
   if (window.location.pathname === '/') {
     // Generate the home page
-    GeneratePage(MainHome(useData), 'Accueil')
+    GeneratePage(MainHome(data), 'Accueil')
   }
 
   // If the page is a photographer page
@@ -35,7 +35,7 @@ export default function createPages(useData) {
     const slug = window.location.pathname.split('/')[1]
 
     // Get the photographer data
-    const photographerData = useData.find(photographer => photographer.slug === slug)
+    const photographerData = data.find(photographer => photographer.slug === slug)
 
     // If the photographer exists
     if (photographerData) {

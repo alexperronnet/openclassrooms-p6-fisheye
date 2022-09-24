@@ -2,7 +2,7 @@
 import { PhotographerCard } from '@views'
 
 // Create the main home view
-export default function MainHome(useData) {
+export default function MainHome(data) {
   // Create home main element
   const main = document.createElement('main')
   main.classList.add('main')
@@ -13,7 +13,7 @@ export default function MainHome(useData) {
   photographerGrid.classList.add('photographers-grid')
 
   // Add all photographers cards to the grid and sort them by id
-  useData
+  data
     .sort((a, b) => a.id - b.id)
     .forEach(photographer => {
       photographerGrid.append(PhotographerCard(photographer))

@@ -23,7 +23,6 @@
 }
 
 .photographer-media__media-wrapper {
-  aspect-ratio: 1 / 1;
   border-radius: $border-radius;
   overflow: hidden;
   box-shadow: $shadow;
@@ -51,8 +50,12 @@
   opacity: 1;
 }
 
-.photographer-media__media-wrapper:hover .photographer-media__image {
+.photographer-media__media-wrapper:is(:hover, :focus-visible) .photographer-media__image {
   transform: scale(1.1);
+}
+
+.photographer-media__media-wrapper:is(:hover, :focus-visible):has(> .photographer-media__video)::before {
+  opacity: 0;
 }
 
 .photographer-media__media-wrapper:has(> .photographer-media__video)::before {
@@ -60,13 +63,15 @@
   position: absolute;
   inset: 0;
   background: url('/assets/svgs/player-white.svg') no-repeat center/8rem;
+  transition: $transition;
+  transition-property: opacity;
 }
 
 .photographer-media__image,
 .photographer-media__video {
+  border-radius: $border-radius;
   object-fit: cover;
-  width: 100%;
-  height: 100%;
+  aspect-ratio: 1 / 1;
   transition: $transition;
   transition-property: transform;
 }
@@ -122,5 +127,4 @@
 .photographer-media__likes-button[data-state='liked'] .photographer-media__likes-icon {
   opacity: 1;
   filter: brightness(1.5);
-  animation: likes 150ms ease-in-out;
 }

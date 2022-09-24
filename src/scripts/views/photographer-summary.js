@@ -1,5 +1,5 @@
 // Create the photographer summary view
-export default function PhotographerSummary(useData) {
+export default function PhotographerSummary(data) {
   // Create photographer summary element
   const photographerSummary = document.createElement('section')
   photographerSummary.classList.add('photographer-summary')
@@ -11,7 +11,7 @@ export default function PhotographerSummary(useData) {
   // Create photographer summary name
   const photographerSummaryName = document.createElement('h1')
   photographerSummaryName.classList.add('photographer-summary__name')
-  photographerSummaryName.textContent = useData.name
+  photographerSummaryName.textContent = data.name
 
   // Create photographer summary infos
   const photographerSummaryInfos = document.createElement('div')
@@ -20,12 +20,12 @@ export default function PhotographerSummary(useData) {
   // Create photographer summary location
   const photographerSummaryLocation = document.createElement('p')
   photographerSummaryLocation.classList.add('photographer-summary__location')
-  photographerSummaryLocation.textContent = `${useData.city}, ${useData.country}`
+  photographerSummaryLocation.textContent = `${data.city}, ${data.country}`
 
   // Create photographer summary tagline
   const photographerSummaryTagline = document.createElement('p')
   photographerSummaryTagline.classList.add('photographer-summary__tagline')
-  photographerSummaryTagline.textContent = useData.tagline
+  photographerSummaryTagline.textContent = data.tagline
 
   // Append photographer summary location and tagline to infos
   photographerSummaryInfos.append(photographerSummaryLocation, photographerSummaryTagline)
@@ -36,7 +36,7 @@ export default function PhotographerSummary(useData) {
   // Create photographer summary button
   const photographerSummaryButton = document.createElement('button')
   photographerSummaryButton.classList.add('photographer-summary__contact')
-  photographerSummaryButton.title = `Contacter ${useData.name}`
+  photographerSummaryButton.title = `Contacter ${data.name}`
   photographerSummaryButton.textContent = 'Contactez-moi'
 
   // Create photographer summary image wrapper
@@ -46,8 +46,8 @@ export default function PhotographerSummary(useData) {
   // Create photographer summary image
   const photographerSummaryImage = document.createElement('img')
   photographerSummaryImage.classList.add('photographer-summary__image')
-  photographerSummaryImage.src = useData.avatar
-  photographerSummaryImage.alt = `Photo de ${useData.name}`
+  photographerSummaryImage.src = data.avatar
+  photographerSummaryImage.alt = `Photo de ${data.name}`
 
   // Append photographer summary image to wrapper
   photographerSummaryImageWrapper.append(photographerSummaryImage)

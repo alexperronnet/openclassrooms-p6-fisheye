@@ -1,7 +1,10 @@
+// Import controllers
+import { CreatePages } from '@controllers'
+
 // Create the router
-export default function Router(createPages, useData) {
+export default function Router(data) {
   // Render page on first load
-  createPages(useData)
+  CreatePages(data)
 
   // Listen for click on internal links
   document.addEventListener('click', event => {
@@ -22,7 +25,7 @@ export default function Router(createPages, useData) {
         window.history.pushState({}, '', url.pathname)
 
         // Render the page
-        createPages(useData)
+        CreatePages(data)
       }
     }
   })
@@ -30,6 +33,6 @@ export default function Router(createPages, useData) {
   // Listen for popstate
   window.addEventListener('popstate', () => {
     // Render the page
-    createPages(useData)
+    CreatePages(data)
   })
 }

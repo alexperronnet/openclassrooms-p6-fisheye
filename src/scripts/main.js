@@ -2,13 +2,13 @@
 import '@styles/main.scss'
 
 // Import controllers
-import { Router, CreatePages as pages } from '@controllers'
+import { Router } from '@controllers'
 
 // Import data
-import { GetData as useData } from '@models'
-
-// Import data source
-import dataSource from '@data/photographers.json'
+import { GetData } from '@models'
 
 // Initialize the router
-Router(pages, useData(dataSource))
+Router(
+  // Get the data
+  GetData()
+)

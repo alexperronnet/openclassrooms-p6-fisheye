@@ -1,5 +1,8 @@
+// Import data source
+import dataSource from '@data/photographers.json'
+
 // Get all medias
-export default function GetData(dataSource) {
+export default function GetData() {
   // Get the photographer data
   const photographerData = dataSource.photographers
 

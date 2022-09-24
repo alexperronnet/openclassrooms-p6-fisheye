@@ -1,5 +1,5 @@
 // Create the photographer medias view
-export default function PhotographerMedias(useData) {
+export default function PhotographerMedias(data) {
   // Create photographer medias element
   const photographerMedias = document.createElement('section')
   photographerMedias.classList.add('photographer-medias')
@@ -27,8 +27,6 @@ export default function PhotographerMedias(useData) {
       video.classList.add('photographer-media__video')
       video.src = media.video
       video.title = media.title
-      video.onmouseover = () => video.play()
-      video.onmouseout = () => video.pause()
 
       // Return video
       return video
@@ -36,7 +34,7 @@ export default function PhotographerMedias(useData) {
   }
 
   // Map all medias
-  useData.medias.map(media => {
+  data.medias.map(media => {
     // Create media element
     const mediaElement = document.createElement('article')
     mediaElement.classList.add('photographer-media')
@@ -46,6 +44,15 @@ export default function PhotographerMedias(useData) {
     const mediaWrapper = document.createElement('div')
     mediaWrapper.classList.add('photographer-media__media-wrapper')
     mediaWrapper.tabIndex = 0
+
+    // If media is a video
+    if (media.video) {
+      // Play the video when media wrapper is hovered or focused and stop it when it's not
+      mediaWrapper.onmouseover = () => mediaWrapper.querySelector('video').play()
+      mediaWrapper.onmouseout = () => mediaWrapper.querySelector('video').pause()
+      mediaWrapper.onfocus = () => mediaWrapper.querySelector('video').play()
+      mediaWrapper.onblur = () => mediaWrapper.querySelector('video').pause()
+    }
 
     // Append media to media wrapper
     mediaWrapper.append(SwitchMedia(media))
@@ -86,6 +93,23 @@ export default function PhotographerMedias(useData) {
       mediaLikesButton.dataset.state === 'liked'
         ? mediaLikesCount.textContent++ & totalLikesCount.textContent++
         : mediaLikesCount.textContent-- & totalLikesCount.textContent--
+    })
+
+    // Add an animation to media likes button each time it's clicked
+    mediaLikesButton.addEventListener('animationend', () => {
+      mediaLikesButton.style.animation = ''
+    })
+    mediaLikesButton.addEventListener('click', () => {
+      mediaLikesButton.style.animation = 'likes 150ms ease-in-out'
+    })
+
+    // Add animation on heart aside each time media likes button is animated
+    mediaLikesButton.addEventListener('animationstart', () => {
+      document.querySelector('.photographer-aside__likes-icon').style.animation =
+        'likes 150ms ease-in-out'
+    })
+    mediaLikesButton.addEventListener('animationend', () => {
+      document.querySelector('.photographer-aside__likes-icon').style.animation = ''
     })
 
     // Create media likes icon
