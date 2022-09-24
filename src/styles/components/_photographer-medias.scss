@@ -108,7 +108,7 @@
 }
 
 .photographer-media__likes-button:is(:hover, :focus-visible) .photographer-media__likes-icon {
-  opacity: 1;
+  opacity: 0.75;
 }
 
 .photographer-media__likes-icon {
@@ -117,4 +117,10 @@
   opacity: 0.5;
   transition: $transition;
   transition-property: opacity;
+}
+
+.photographer-media__likes-button[data-state='liked'] .photographer-media__likes-icon {
+  opacity: 1;
+  filter: brightness(1.5);
+  animation: likes 150ms ease-in-out;
 }

@@ -12,7 +12,7 @@ export default function PhotographerAside(useData) {
   const photographerAsideLikesCount = document.createElement('p')
   photographerAsideLikesCount.classList.add('photographer-aside__likes-count')
   photographerAsideLikesCount.textContent = useData.medias.reduce(
-    (total, media) => total + media.likes,
+    (sum, media) => sum + media.likes,
     0
   )
 

@@ -73,6 +73,21 @@ export default function PhotographerMedias(useData) {
     mediaLikesButton.classList.add('photographer-media__likes-button')
     mediaLikesButton.title = "J'aime"
 
+    // Add event listener to media likes button
+    mediaLikesButton.addEventListener('click', () => {
+      // Get the total likes count
+      const totalLikesCount = document.querySelector('.photographer-aside__likes-count')
+
+      // Add data-state attribute to media likes button
+      mediaLikesButton.dataset.state =
+        mediaLikesButton.dataset.state === 'liked' ? 'unliked' : 'liked'
+
+      // If media likes button is liked
+      mediaLikesButton.dataset.state === 'liked'
+        ? mediaLikesCount.textContent++ & totalLikesCount.textContent++
+        : mediaLikesCount.textContent-- & totalLikesCount.textContent--
+    })
+
     // Create media likes icon
     const mediaLikesIcon = document.createElement('img')
     mediaLikesIcon.classList.add('photographer-media__likes-icon')
