@@ -91,7 +91,7 @@ export default function PhotographerMedias(useData) {
     // Create media likes icon
     const mediaLikesIcon = document.createElement('img')
     mediaLikesIcon.classList.add('photographer-media__likes-icon')
-    mediaLikesIcon.src = '/openclassrooms-p6-fisheye/assets/svgs/heart-red.svg'
+    mediaLikesIcon.src = '/assets/svgs/heart-red.svg'
     mediaLikesIcon.alt = "J'aime"
 
     // Append media likes icon to media likes button

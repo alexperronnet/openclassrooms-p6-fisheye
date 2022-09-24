@@ -7,13 +7,13 @@ export default function Header() {
   // Create header link
   const headerLink = document.createElement('a')
   headerLink.classList.add('header__link')
-  headerLink.href = '/openclassrooms-p6-fisheye/'
+  headerLink.href = '/'
   headerLink.title = "Retourner à l'accueil"
 
   // Create header logo
   const headerLogo = document.createElement('img')
   headerLogo.classList.add('header__logo')
-  headerLogo.src = '/openclassrooms-p6-fisheye/assets/svgs/logo.svg'
+  headerLogo.src = '/assets/svgs/logo.svg'
   headerLogo.alt = 'FishEye accueil'
 
   // Append header logo to header link
@@ -25,9 +25,7 @@ export default function Header() {
   headerTitle.textContent = 'Nos photographes'
 
   // Append header link and title to header
-  location.pathname === '/openclassrooms-p6-fisheye/'
-    ? header.append(headerLink, headerTitle)
-    : header.append(headerLink)
+  location.pathname === '/' ? header.append(headerLink, headerTitle) : header.append(headerLink)
 
   // Return header
   return header

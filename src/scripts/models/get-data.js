@@ -12,25 +12,23 @@ export default function GetData(dataSource) {
     photographer.medias = mediaData.filter(media => media.photographerId === photographer.id)
 
     // Create a slug for each photographer
-    photographer.slug = `${photographer.name.toLowerCase().replace(/ /g, '-')}`
+    photographer.slug = photographer.name.toLowerCase().replace(/ /g, '-')
 
     // Get photographer avatar by replacing the extension
-    photographer.avatar = `/openclassrooms-p6-fisheye/assets/avatars/${photographer.portrait.replace(
-      '.jpg',
-      '.webp'
-    )}`
+    photographer.avatar = `/assets/avatars/${photographer.portrait.replace('.jpg', '.webp')}`
 
     // Loop through the photographer medias
     photographer.medias.forEach(media => {
       // Filter medias by type
       if (media.image) {
         // get the media image by replacing the extension
-        media.image = `/openclassrooms-p6-fisheye/assets/medias/${
-          photographer.id
-        }/images/${media.image.replace('.jpg', '.webp')}`
+        media.image = `/assets/medias/${photographer.id}/images/${media.image.replace(
+          '.jpg',
+          '.webp'
+        )}`
       } else if (media.video) {
         // get the media video
-        media.video = `/openclassrooms-p6-fisheye/assets/medias/${photographer.id}/videos/${media.video}`
+        media.video = `/assets/medias/${photographer.id}/videos/${media.video}`
       }
     })
   })

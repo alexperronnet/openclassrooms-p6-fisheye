@@ -2,7 +2,6 @@ import { defineConfig } from 'vite'
 import { resolve } from 'path'
 
 export default defineConfig({
-  base: '/openclassrooms-p6-fisheye/',
   resolve: {
     alias: {
       '@data': resolve(__dirname, './src/data'),

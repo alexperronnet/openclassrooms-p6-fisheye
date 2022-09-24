@@ -23,7 +23,7 @@ export default function Main404() {
   // Create 404 link
   const notFoundLink = document.createElement('a')
   notFoundLink.classList.add('not-found__link')
-  notFoundLink.href = '/openclassrooms-p6-fisheye/'
+  notFoundLink.href = '/'
   notFoundLink.title = "Retourner à l'accueil"
   notFoundLink.textContent = "Retourner à l'accueil"
 

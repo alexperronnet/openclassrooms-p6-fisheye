@@ -19,7 +19,7 @@ export default function PhotographerAside(useData) {
   // Create photographer aside likes icon
   const photographerAsideLikesIcon = document.createElement('img')
   photographerAsideLikesIcon.classList.add('photographer-aside__likes-icon')
-  photographerAsideLikesIcon.src = '/openclassrooms-p6-fisheye/assets/svgs/heart-black.svg'
+  photographerAsideLikesIcon.src = '/assets/svgs/heart-black.svg'
   photographerAsideLikesIcon.alt = "J'aime"
   photographerAsideLikesIcon.title = 'Total des likes'
 
