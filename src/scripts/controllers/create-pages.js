@@ -23,17 +23,17 @@ export default function createPages(useData) {
     document.querySelector('meta[property="twitter:title"]').setAttribute('content', document.title)
   }
 
-  if (window.location.pathname === '/') {
+  if (window.location.pathname === '/openclassrooms-p6-fisheye/') {
     return GeneratePage(MainHome(useData), 'Accueil')
   }
 
   // Generate the photographer page for each photographer
-  if (window.location.pathname.includes('/')) {
+  if (window.location.pathname.includes('/openclassrooms-p6-fisheye/')) {
     // Get the photographer slug
-    const slug = window.location.pathname.split('/')[1]
+    const photographerSlug = window.location.pathname.split('/').pop()
 
     // Get the photographer data
-    const photographer = useData.find(photographer => photographer.slug === slug)
+    const photographer = useData.find(photographer => photographer.slug === photographerSlug)
 
     // Check if the photographer exists
     if (photographer) {
