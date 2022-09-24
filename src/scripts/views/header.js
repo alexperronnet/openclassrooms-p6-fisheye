@@ -1,29 +1,32 @@
-// Create the header view
+// Create header view
 export default function Header() {
-  // Get the header element
-  const header = document.querySelector('header')
+  // Create header element
+  const header = document.createElement('header')
+  header.classList.add('header')
 
-  // Get the default URL
-  const defaultUrl = window.location.pathname === '/'
+  // Create header link
+  const headerLink = document.createElement('a')
+  headerLink.classList.add('header__link')
+  headerLink.href = '/'
+  headerLink.title = "Retourner à l'accueil"
 
-  // Create the template content
-  header.innerHTML = `
-    <a
-      href="/"
-      class="header__link"
-      title="Retour à l'accueil"
-      aria-label="Retour à l'accueil"
-    >
-      <img
-        src="/assets/svgs/logo.svg"
-        alt="FishEye page d'accueil"
-        class="header__logo"
-      />
-    </a>
+  // Create header logo
+  const headerLogo = document.createElement('img')
+  headerLogo.classList.add('header__logo')
+  headerLogo.src = '/assets/svgs/logo.svg'
+  headerLogo.alt = 'FishEye accueil'
 
-    ${defaultUrl ? '<h1 class="header__title">Nos photographes</h1>' : ''}
-  `
+  // Append header logo to header link
+  headerLink.append(headerLogo)
 
-  // Return the header element
-  return header.outerHTML
+  // Create header title
+  const headerTitle = document.createElement('h1')
+  headerTitle.classList.add('header__title')
+  headerTitle.textContent = 'Nos photographes'
+
+  // Append header link and title to header
+  location.pathname === '/' ? header.append(headerLink, headerTitle) : header.append(headerLink)
+
+  // Return header
+  return header
 }

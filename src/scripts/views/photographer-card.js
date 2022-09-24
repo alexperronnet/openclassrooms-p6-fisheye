@@ -1,38 +1,66 @@
 // Create the photographer card view
 export default function PhotographerCard(useData) {
-  // Create a template
-  const template = document.createElement('article')
+  // Create photographer card element
+  const photographerCard = document.createElement('article')
+  photographerCard.classList.add('photographer-card')
+  photographerCard.id = useData.id
 
-  // Add a class to the template
-  template.classList.add('photographer-card')
+  // Create photographer card link
+  const photographerCardLink = document.createElement('a')
+  photographerCardLink.classList.add('photographer-card__link')
+  photographerCardLink.href = useData.slug
+  photographerCardLink.title = `Voir le profil de ${useData.name}`
 
-  // Add an id to the template
-  template.id = useData.id
+  // Create photographer card image wrapper
+  const photographerCardImageWrapper = document.createElement('div')
+  photographerCardImageWrapper.classList.add('photographer-card__image-wrapper')
 
-  // Create content for the template
-  template.innerHTML = `
-    <a
-      href="/${useData.slug}"
-      class="photographer-card__link"
-      title="Voir le profil de ${useData.name}"
-      aria-label="Voir le profil de ${useData.name}"
-    >
-      <div class="photographer-card__image-wrapper">
-        <img
-          class="photographer-card__image"
-          src="${useData.avatar}"
-          alt="${useData.name} avatar"
-        />
-      </div>
-      <h2 class="photographer-card__name">${useData.name}</h2>
-    </a>
-    <div class="photographer-card__infos">
-      <p class="photographer-card__location">${useData.city}, ${useData.country}</p>
-      <p class="photographer-card__tagline">${useData.tagline}</p>
-      <p class="photographer-card__price">${useData.price}€/jour</p>
-    </div>
-  `
+  // Create photographer card image
+  const photographerCardImage = document.createElement('img')
+  photographerCardImage.classList.add('photographer-card__image')
+  photographerCardImage.src = useData.avatar
+  photographerCardImage.alt = `Photo de ${useData.name}`
 
-  // Return the template content
-  return template.outerHTML
+  // Append photographer card image to wrapper
+  photographerCardImageWrapper.append(photographerCardImage)
+
+  // Create photographer card name
+  const photographerCardName = document.createElement('h2')
+  photographerCardName.classList.add('photographer-card__name')
+  photographerCardName.textContent = useData.name
+
+  // Append photographer card image wrapper and name to link
+  photographerCardLink.append(photographerCardImageWrapper, photographerCardName)
+
+  // Create photographer card infos
+  const photographerCardInfos = document.createElement('div')
+  photographerCardInfos.classList.add('photographer-card__infos')
+
+  // Create photographer card location
+  const photographerCardLocation = document.createElement('p')
+  photographerCardLocation.classList.add('photographer-card__location')
+  photographerCardLocation.textContent = `${useData.city}, ${useData.country}`
+
+  // Create photographer card tagline
+  const photographerCardTagline = document.createElement('p')
+  photographerCardTagline.classList.add('photographer-card__tagline')
+  photographerCardTagline.textContent = useData.tagline
+
+  // Create photographer card price
+  const photographerCardPrice = document.createElement('p')
+  photographerCardPrice.classList.add('photographer-card__price')
+  photographerCardPrice.textContent = `${useData.price}€ / jour`
+
+  // Append photographer card location, tagline and price to infos
+  photographerCardInfos.append(
+    photographerCardLocation,
+    photographerCardTagline,
+    photographerCardPrice
+  )
+
+  // Append photographer card link and infos to card
+  photographerCard.append(photographerCardLink, photographerCardInfos)
+
+  // Return photographer card
+  return photographerCard
 }

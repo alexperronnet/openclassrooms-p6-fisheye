@@ -1,29 +1,16 @@
-// Import needed views
-import { PhotographerHeader, PhotographerMedias, PhotographerAside } from '@views'
+// Import all needed views
+import { PhotographerSummary, PhotographerMedias, PhotographerAside } from '@views'
 
-// Create the main photographer view
-export default function PhotographerMain(useData) {
-  // Get the main element
-  const main = document.querySelector('main')
+// Create the main home view
+export default function MainPhotographer(useData) {
+  // Create main element
+  const main = document.createElement('main')
+  main.classList.add('main')
+  main.id = 'main-photographer'
 
-  // Add the main content
-  main.innerHTML = `
-    ${
-      // Add the photographer header
-      PhotographerHeader(useData)
-    }
+  // Create photographer summary and medias
+  main.append(PhotographerSummary(useData), PhotographerMedias(useData), PhotographerAside(useData))
 
-    ${
-      // Add the photographer medias
-      PhotographerMedias(useData)
-    }
-
-    ${
-      // Add the photographer aside
-      PhotographerAside(useData)
-    }
-  `
-
-  // Return the main element
-  return main.outerHTML
+  // Return main
+  return main
 }

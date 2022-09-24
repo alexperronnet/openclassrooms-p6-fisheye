@@ -1,28 +1,38 @@
-// Create the photographer aside view
+// Create photographer aside view
 export default function PhotographerAside(useData) {
-  // Create a template
-  const template = document.createElement('aside')
+  // Create photographer aside element
+  const photographerAside = document.createElement('aside')
+  photographerAside.classList.add('photographer-aside')
 
-  // Add a class to the template
-  template.classList.add('photographer-aside')
+  // Create photographer aside likes
+  const photographerAsideLikes = document.createElement('div')
+  photographerAsideLikes.classList.add('photographer-aside__likes')
 
-  // Create content for the template
-  template.innerHTML = `
-    <div class="photographer-aside__likes">
-      <p class="photographer-aside__likes-count">10</p>
-      <img
-        src="/assets/svgs/heart-black.svg"
-        alt="J'aimes"
-        title="Total j'aimes"
-        aria-label="Total j'aimes"
-        class="photographer-aside__likes-icon"
-      />
-    </div>
-    <p class="photographer-aside__price">
-      ${useData.price}€ / jour
-    </p>
-  `
+  // Create photographer aside likes count and add sum of likes to it
+  const photographerAsideLikesCount = document.createElement('p')
+  photographerAsideLikesCount.classList.add('photographer-aside__likes-count')
+  photographerAsideLikesCount.textContent = useData.medias.reduce(
+    (total, media) => total + media.likes,
+    0
+  )
 
-  // Return the template
-  return template.outerHTML
+  // Create photographer aside likes icon
+  const photographerAsideLikesIcon = document.createElement('img')
+  photographerAsideLikesIcon.classList.add('photographer-aside__likes-icon')
+  photographerAsideLikesIcon.src = 'assets/svgs/heart-black.svg'
+  photographerAsideLikesIcon.alt = "J'aime"
+  photographerAsideLikesIcon.title = 'Total des likes'
+
+  // Append photographer aside likes count and icon to likes
+  photographerAsideLikes.append(photographerAsideLikesCount, photographerAsideLikesIcon)
+
+  // Create photographer aside price
+  const photographerAsidePrice = document.createElement('p')
+  photographerAsidePrice.classList.add('photographer-aside__price')
+  photographerAsidePrice.textContent = useData.price + '€ / jour'
+
+  // Append photographer aside likes and price to aside
+  photographerAside.append(photographerAsideLikes, photographerAsidePrice)
+
+  return photographerAside
 }

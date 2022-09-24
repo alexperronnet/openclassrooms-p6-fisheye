@@ -1,83 +1,100 @@
 // Create the photographer medias view
 export default function PhotographerMedias(useData) {
-  // Create a template
-  const template = document.createElement('section')
+  // Create photographer medias element
+  const photographerMedias = document.createElement('section')
+  photographerMedias.classList.add('photographer-medias')
 
-  // Add a class to the template
-  template.classList.add('photographer-medias')
-
-  // Switch between the medias type
+  // Switch between medias type
   function SwitchMedia(media) {
-    // If the media type is image
+    // If media is an image
     if (media.image) {
-      return `
-        <img
-          src="${media.image}"
-          alt="${media.title}"
-          title="${media.title}"
-          aria-label="${media.title}"
-          loading="lazy"
-          class="photographer-media__image"
-        />
-      `
+      // Create image element
+      const image = document.createElement('img')
+      image.classList.add('photographer-media__image')
+      image.src = media.image
+      image.alt = media.title
+      image.title = media.title
+      image.loading = 'lazy'
+
+      // Return image
+      return image
     }
 
-    // If the media type is video
+    // If media is a video
     if (media.video) {
-      return `
-        <video
-          src="${media.video}"
-          alt="${media.title}"
-          title="${media.title}"
-          aria-label="${media.title}"
-          loading="lazy"
-          onmouseover="this.play()"
-          onmouseout="this.pause()"
-          class="photographer-media__video"
-        />
-      `
+      // Create video element
+      const video = document.createElement('video')
+      video.classList.add('photographer-media__video')
+      video.src = media.video
+      video.title = media.title
+      video.onmouseover = () => video.play()
+      video.onmouseout = () => video.pause()
+
+      // Return video
+      return video
     }
   }
 
-  // Create content for the template
-  template.innerHTML = `
-    ${
-      // Add the photographer medias
-      useData.medias
-        .map(
-          media => `
-            <article class="photographer-media" id="${media.id}">
-              <div class="photographer-media__media-wrapper" tabindex="0">
-                ${
-                  // Add the media
-                  SwitchMedia(media)
-                }
-              </div>
-              <div class="photographer-media__infos">
-                <h3 class="photographer-media__title">${media.title}</h3>
-                <div class="photographer-media__likes">
-                  <p class="photographer-media__likes-count">${media.likes}</p>
-                  <button
-                    class="photographer-media__likes-button"
-                    title="J'aime"
-                    aria-label="J'aime"
-                  >
-                    <img
-                      src="/assets/svgs/heart-red.svg"
-                      alt="J'aime"
-                      title="J'aime"
-                      aria-label="J'aime"
-                      class="photographer-media__likes-icon"
-                    />
-                </div>
-              </div>
-            </article>
-          `
-        )
-        .join('')
-    }
-  `
+  // Map all medias
+  useData.medias.map(media => {
+    // Create media element
+    const mediaElement = document.createElement('article')
+    mediaElement.classList.add('photographer-media')
+    mediaElement.id = media.id
 
-  // Return the template content
-  return template.outerHTML
+    // Create media wrapper
+    const mediaWrapper = document.createElement('div')
+    mediaWrapper.classList.add('photographer-media__media-wrapper')
+    mediaWrapper.tabIndex = 0
+
+    // Append media to media wrapper
+    mediaWrapper.append(SwitchMedia(media))
+
+    // Create media infos
+    const mediaInfo = document.createElement('div')
+    mediaInfo.classList.add('photographer-media__infos')
+
+    // Create media title
+    const mediaTitle = document.createElement('h3')
+    mediaTitle.classList.add('photographer-media__title')
+    mediaTitle.textContent = media.title
+
+    // Create media likes
+    const mediaLikes = document.createElement('div')
+    mediaLikes.classList.add('photographer-media__likes')
+
+    // Create media likes count
+    const mediaLikesCount = document.createElement('p')
+    mediaLikesCount.classList.add('photographer-media__likes-count')
+    mediaLikesCount.textContent = media.likes
+
+    // Create media likes button
+    const mediaLikesButton = document.createElement('button')
+    mediaLikesButton.classList.add('photographer-media__likes-button')
+    mediaLikesButton.title = "J'aime"
+
+    // Create media likes icon
+    const mediaLikesIcon = document.createElement('img')
+    mediaLikesIcon.classList.add('photographer-media__likes-icon')
+    mediaLikesIcon.src = '/assets/svgs/heart-red.svg'
+    mediaLikesIcon.alt = "J'aime"
+
+    // Append media likes icon to media likes button
+    mediaLikesButton.append(mediaLikesIcon)
+
+    // Append media likes button and count to media likes
+    mediaLikes.append(mediaLikesCount, mediaLikesButton)
+
+    // Append media title and likes to media infos
+    mediaInfo.append(mediaTitle, mediaLikes)
+
+    // Append media wrapper and infos to media element
+    mediaElement.append(mediaWrapper, mediaInfo)
+
+    // Append media element to photographer medias
+    photographerMedias.append(mediaElement)
+  })
+
+  // Return photographer medias
+  return photographerMedias
 }

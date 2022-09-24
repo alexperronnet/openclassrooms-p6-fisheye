@@ -1,5 +1,5 @@
 // Import needed views
-import { Header, HomeMain, PhotographerMain, NotFoundMain } from '@views'
+import { Header, MainHome, Main404, MainPhotographer } from '@views'
 
 // Create all pages
 export default function createPages(useData) {
@@ -8,11 +8,11 @@ export default function createPages(useData) {
     // Get the app element
     const app = document.querySelector('#app')
 
-    // Add the header
-    app.innerHTML = Header()
+    // Clear the app element
+    app.textContent = ''
 
-    // Add the main content
-    app.innerHTML += mainContent
+    // Append header and main content to app
+    app.append(Header(), mainContent)
 
     // Update title document
     document.title = title + ' — FishEye'
@@ -23,9 +23,8 @@ export default function createPages(useData) {
     document.querySelector('meta[property="twitter:title"]').setAttribute('content', document.title)
   }
 
-  // Generate the home page
   if (window.location.pathname === '/') {
-    return GeneratePage(HomeMain(useData), 'Accueil')
+    return GeneratePage(MainHome(useData), 'Accueil')
   }
 
   // Generate the photographer page for each photographer
@@ -38,10 +37,10 @@ export default function createPages(useData) {
 
     // Check if the photographer exists
     if (photographer) {
-      return GeneratePage(PhotographerMain(photographer), photographer.name)
+      return GeneratePage(MainPhotographer(photographer), photographer.name)
     }
   }
 
   // Generate the 404 page if no page is found
-  return GeneratePage(NotFoundMain(), 'Page introuvable')
+  return GeneratePage(Main404(), 'Page introuvable')
 }
