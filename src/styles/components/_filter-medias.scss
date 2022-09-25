@@ -1,0 +1,103 @@
+// Use abstracts
+@use '@styles/abstracts/variables' as *;
+
+.filter-medias {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.filter-medias__label {
+  font-size: 1.125rem;
+}
+
+.filter-medias__select {
+  max-width: 10rem;
+  width: 100%;
+  position: relative;
+}
+
+.filter-medias__current-state {
+  width: 100%;
+  color: $color-white;
+  background-color: $color-red;
+  padding: 1rem 1.5rem;
+  border-radius: $border-radius;
+  box-shadow: $shadow;
+  border: none;
+  transition: $transition;
+  transition-property: background-color;
+  position: relative;
+  z-index: 2;
+  user-select: none;
+}
+
+.filter-medias__current-state::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: 1rem;
+  transform: translateY(-50%);
+  background: url('/assets/svgs/chevron-down-white.svg') no-repeat center;
+  width: 1.5rem;
+  height: 1.5rem;
+  transition: $transition;
+  transition-property: transform;
+}
+
+.filter-medias__current-state[aria-expanded='true']::after {
+  transform: translateY(-50%) rotate(180deg);
+}
+
+.filter-medias__current-state:hover {
+  cursor: pointer;
+  background-color: lighten($color-red, 10%);
+}
+
+.filter-medias__current-state:focus-visible {
+  outline: 0.2rem solid rgba($color-red, 0.5);
+  outline-offset: 0.2rem;
+}
+
+.filter-medias__options-group {
+  width: 100%;
+  color: $color-white;
+  background-color: $color-red;
+  padding: 0;
+  list-style: none;
+  position: absolute;
+  top: calc(100% + 0.6rem);
+  z-index: 1;
+  border-radius: $border-radius;
+  box-shadow: $shadow;
+  overflow: hidden;
+}
+
+.filter-medias__options-group[aria-hidden='false'] {
+  display: block;
+  animation: dropdown-enter 150ms ease-out;
+}
+
+.filter-medias__options-group[isClosing] {
+  animation: dropdown-exit 150ms ease-out;
+}
+
+.filter-medias__options-group[aria-hidden='true'] {
+  display: none;
+}
+
+.filter-medias__option {
+  padding: 1rem 1.5rem;
+  transition: $transition;
+  transition-property: background-color;
+}
+
+.filter-medias__option:is(:hover, :focus-visible) {
+  outline: none;
+  cursor: pointer;
+  background-color: lighten($color-red, 10%);
+}
+
+.filter-medias__option:not(:last-child) {
+  border-bottom: 1px solid rgba($color-white, 0.2);
+}

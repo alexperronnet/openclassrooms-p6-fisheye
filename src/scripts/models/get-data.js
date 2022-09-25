@@ -34,6 +34,23 @@ export default function GetData() {
         media.video = `/assets/medias/${photographer.id}/videos/${media.video}`
       }
     })
+
+    photographer.mediasSort = {
+      // Sort medias by popularity
+      popularity: [...photographer.medias].sort((a, b) => {
+        return b.likes - a.likes
+      }),
+
+      // Sort medias by date
+      date: [...photographer.medias].sort((a, b) => {
+        return new Date(b.date) - new Date(a.date)
+      }),
+
+      // Sort medias by title
+      title: [...photographer.medias].sort((a, b) => {
+        return a.title.localeCompare(b.title)
+      })
+    }
   })
 
   return photographerData

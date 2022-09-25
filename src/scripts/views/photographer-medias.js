@@ -1,8 +1,15 @@
 // Create the photographer medias view
-export default function PhotographerMedias(data) {
+export default function PhotographerMedias(data, filterMedia) {
   // Create photographer medias element
   const photographerMedias = document.createElement('section')
   photographerMedias.classList.add('photographer-medias')
+
+  // Create photographer medias grid
+  const photographerMediasGrid = document.createElement('div')
+  photographerMediasGrid.classList.add('medias-grid')
+
+  // Append filter medias
+  photographerMedias.append(filterMedia)
 
   // Switch between medias type
   function SwitchMedia(media) {
@@ -10,7 +17,7 @@ export default function PhotographerMedias(data) {
     if (media.image) {
       // Create image element
       const image = document.createElement('img')
-      image.classList.add('photographer-media__image')
+      image.classList.add('media-card__image')
       image.src = media.image
       image.alt = media.title
       image.title = media.title
@@ -24,7 +31,7 @@ export default function PhotographerMedias(data) {
     if (media.video) {
       // Create video element
       const video = document.createElement('video')
-      video.classList.add('photographer-media__video')
+      video.classList.add('media-card__video')
       video.src = media.video
       video.title = media.title
 
@@ -34,15 +41,15 @@ export default function PhotographerMedias(data) {
   }
 
   // Map all medias
-  data.medias.map(media => {
+  data.mediasSort.popularity.map(media => {
     // Create media element
     const mediaElement = document.createElement('article')
-    mediaElement.classList.add('photographer-media')
+    mediaElement.classList.add('media-card')
     mediaElement.id = media.id
 
     // Create media wrapper
     const mediaWrapper = document.createElement('div')
-    mediaWrapper.classList.add('photographer-media__media-wrapper')
+    mediaWrapper.classList.add('media-card__wrapper-media')
     mediaWrapper.tabIndex = 0
 
     // If media is a video
@@ -59,25 +66,25 @@ export default function PhotographerMedias(data) {
 
     // Create media infos
     const mediaInfo = document.createElement('div')
-    mediaInfo.classList.add('photographer-media__infos')
+    mediaInfo.classList.add('media-card__infos')
 
     // Create media title
     const mediaTitle = document.createElement('h3')
-    mediaTitle.classList.add('photographer-media__title')
+    mediaTitle.classList.add('media-card__title')
     mediaTitle.textContent = media.title
 
     // Create media likes
     const mediaLikes = document.createElement('div')
-    mediaLikes.classList.add('photographer-media__likes')
+    mediaLikes.classList.add('media-card__likes')
 
     // Create media likes count
     const mediaLikesCount = document.createElement('p')
-    mediaLikesCount.classList.add('photographer-media__likes-count')
+    mediaLikesCount.classList.add('media-card__likes-count')
     mediaLikesCount.textContent = media.likes
 
     // Create media likes button
     const mediaLikesButton = document.createElement('button')
-    mediaLikesButton.classList.add('photographer-media__likes-button')
+    mediaLikesButton.classList.add('media-card__likes-button')
     mediaLikesButton.title = "J'aime"
 
     // Add event listener to media likes button
@@ -114,7 +121,7 @@ export default function PhotographerMedias(data) {
 
     // Create media likes icon
     const mediaLikesIcon = document.createElement('img')
-    mediaLikesIcon.classList.add('photographer-media__likes-icon')
+    mediaLikesIcon.classList.add('media-card__likes-icon')
     mediaLikesIcon.src = '/assets/svgs/heart-red.svg'
     mediaLikesIcon.alt = "J'aime"
 
@@ -131,8 +138,11 @@ export default function PhotographerMedias(data) {
     mediaElement.append(mediaWrapper, mediaInfo)
 
     // Append media element to photographer medias
-    photographerMedias.append(mediaElement)
+    photographerMediasGrid.append(mediaElement)
   })
+
+  // Append photographer medias grid to photographer medias
+  photographerMedias.append(photographerMediasGrid)
 
   // Return photographer medias
   return photographerMedias

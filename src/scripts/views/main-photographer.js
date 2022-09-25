@@ -1,5 +1,5 @@
 // Import all needed views
-import { PhotographerSummary, PhotographerMedias, PhotographerAside } from '@views'
+import { PhotographerSummary, FilterMedias, PhotographerMedias, PhotographerAside } from '@views'
 
 // Create the main home view
 export default function MainPhotographer(data) {
@@ -8,8 +8,17 @@ export default function MainPhotographer(data) {
   main.classList.add('main')
   main.id = 'main-photographer'
 
-  // Create photographer summary and medias
-  main.append(PhotographerSummary(data), PhotographerMedias(data), PhotographerAside(data))
+  // Append needed views
+  main.append(
+    // Create photographer summary
+    PhotographerSummary(data),
+
+    // Create photographer medias
+    PhotographerMedias(data, FilterMedias()),
+
+    // Create photographer aside
+    PhotographerAside(data)
+  )
 
   // Return main
   return main
