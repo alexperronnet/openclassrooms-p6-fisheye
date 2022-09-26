@@ -14,7 +14,7 @@ export default function MainPhotographer(data) {
     PhotographerSummary(data),
 
     // Create photographer medias
-    PhotographerMedias(data, FilterMedias()),
+    PhotographerMedias(data, FilterMedias(data)),
 
     // Create photographer aside
     PhotographerAside(data)

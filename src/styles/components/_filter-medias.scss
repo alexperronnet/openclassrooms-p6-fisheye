@@ -43,6 +43,7 @@
   height: 1.5rem;
   transition: $transition;
   transition-property: transform;
+  pointer-events: none;
 }
 
 .filter-medias__current-state[aria-expanded='true']::after {
@@ -75,11 +76,7 @@
 
 .filter-medias__options-group[aria-hidden='false'] {
   display: block;
-  animation: dropdown-enter 150ms ease-out;
-}
-
-.filter-medias__options-group[isClosing] {
-  animation: dropdown-exit 150ms ease-out;
+  animation: dropdown-enter 250ms ease-out;
 }
 
 .filter-medias__options-group[aria-hidden='true'] {
@@ -90,14 +87,14 @@
   padding: 1rem 1.5rem;
   transition: $transition;
   transition-property: background-color;
+  position: relative;
+}
+
+.filter-medias__option:focus-visible {
+  outline: none;
 }
 
 .filter-medias__option:is(:hover, :focus-visible) {
-  outline: none;
   cursor: pointer;
   background-color: lighten($color-red, 10%);
-}
-
-.filter-medias__option:not(:last-child) {
-  border-bottom: 1px solid rgba($color-white, 0.2);
 }

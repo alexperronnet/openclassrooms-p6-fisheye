@@ -1,5 +1,5 @@
 // Create the photographer medias view
-export default function PhotographerMedias(data, filterMedia) {
+export default function PhotographerMedias(data, filterMedias) {
   // Create photographer medias element
   const photographerMedias = document.createElement('section')
   photographerMedias.classList.add('photographer-medias')
@@ -7,9 +7,10 @@ export default function PhotographerMedias(data, filterMedia) {
   // Create photographer medias grid
   const photographerMediasGrid = document.createElement('div')
   photographerMediasGrid.classList.add('medias-grid')
+  photographerMediasGrid.dataset.sort = 'popularity'
 
   // Append filter medias
-  photographerMedias.append(filterMedia)
+  photographerMedias.append(filterMedias)
 
   // Switch between medias type
   function SwitchMedia(media) {
@@ -34,14 +35,15 @@ export default function PhotographerMedias(data, filterMedia) {
       video.classList.add('media-card__video')
       video.src = media.video
       video.title = media.title
+      video.muted = true
 
       // Return video
       return video
     }
   }
 
-  // Map all medias
-  data.mediasSort.popularity.map(media => {
+  // Manage media card
+  function MediaCard(media) {
     // Create media element
     const mediaElement = document.createElement('article')
     mediaElement.classList.add('media-card')
@@ -139,7 +141,42 @@ export default function PhotographerMedias(data, filterMedia) {
 
     // Append media element to photographer medias
     photographerMediasGrid.append(mediaElement)
+  }
+
+  // Create media cards for each media and sort them by popularity by default
+  data.mediasSort.popularity.forEach(media => MediaCard(media))
+
+  // New observer for watch the media grid data-sort attribute changes and sort medias by corresponding value
+  const observer = new MutationObserver(mutations => {
+    mutations.forEach(mutation => {
+      // If media grid data-sort attribute changes
+      if (mutation.attributeName === 'data-sort') {
+        // Remove all media cards
+        photographerMediasGrid.innerHTML = ''
+
+        // Create media cards for each media and sort them by popularity
+        if (photographerMediasGrid.dataset.sort === 'popularity') {
+          // Sort medias by popularity
+          data.mediasSort.popularity.forEach(media => MediaCard(media))
+        }
+
+        // Create media cards for each media and sort them by date
+        if (photographerMediasGrid.dataset.sort === 'date') {
+          // Sort medias by date
+          data.mediasSort.date.forEach(media => MediaCard(media))
+        }
+
+        // Create media cards for each media and sort them by title
+        if (photographerMediasGrid.dataset.sort === 'title') {
+          // Sort medias by title
+          data.mediasSort.title.forEach(media => MediaCard(media))
+        }
+      }
+    })
   })
+
+  // Observe media grid data-sort attribute changes
+  observer.observe(photographerMediasGrid, { attributes: true })
 
   // Append photographer medias grid to photographer medias
   photographerMedias.append(photographerMediasGrid)
