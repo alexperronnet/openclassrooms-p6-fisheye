@@ -1,5 +1,11 @@
 // Import all needed views
-import { PhotographerSummary, FilterMedias, PhotographerMedias, PhotographerAside } from '@views'
+import {
+  PhotographerSummary,
+  FilterMedias,
+  PhotographerMedias,
+  PhotographerAside,
+  ModalForm
+} from '@views'
 
 // Create the main home view
 export default function MainPhotographer(data) {
@@ -17,7 +23,10 @@ export default function MainPhotographer(data) {
     PhotographerMedias(data, FilterMedias(data)),
 
     // Create photographer aside
-    PhotographerAside(data)
+    PhotographerAside(data),
+
+    // Create modal form
+    ModalForm(data)
   )
 
   // Return main

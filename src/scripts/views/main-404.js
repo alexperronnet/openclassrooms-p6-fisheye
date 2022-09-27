@@ -18,7 +18,21 @@ export default function Main404() {
   const notFoundDescription = document.createElement('p')
   notFoundDescription.classList.add('not-found__text')
   notFoundDescription.textContent =
-    "Malheuresement la page que vous recherchez n'existe pas ou n'est plus disponible."
+    "Malheuresement la page currentPage n'existe pas ou n'est plus disponible."
+
+  // Get the current path and remove the first slash
+  const currentPath = window.location.pathname.slice(1)
+
+  // Create span for 404 text
+  const notFoundSpan = document.createElement('span')
+  notFoundSpan.classList.add('not-found__text--page')
+  notFoundSpan.textContent = currentPath
+
+  // Append span to 404 text by replacing currentPage
+  notFoundDescription.innerHTML = notFoundDescription.innerHTML.replace(
+    'currentPage',
+    notFoundSpan.outerHTML
+  )
 
   // Create 404 link
   const notFoundLink = document.createElement('a')

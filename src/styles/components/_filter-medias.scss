@@ -5,10 +5,18 @@
   display: flex;
   align-items: center;
   gap: 1rem;
+
+  @media (max-width: $screen-sm) {
+    justify-content: center;
+  }
 }
 
 .filter-medias__label {
   font-size: 1.125rem;
+
+  @media (max-width: $screen-sm) {
+    display: none;
+  }
 }
 
 .filter-medias__select {
@@ -29,7 +37,6 @@
   transition-property: background-color;
   position: relative;
   z-index: 2;
-  user-select: none;
 }
 
 .filter-medias__current-state::after {

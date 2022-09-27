@@ -29,6 +29,13 @@
   }
 }
 
+.not-found__text--page {
+  color: $color-red;
+  background-color: rgba($color-red, 0.1);
+  padding: 0.5rem;
+  border-radius: $border-radius;
+}
+
 .not-found__link {
   @include button;
 }

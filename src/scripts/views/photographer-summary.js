@@ -38,6 +38,7 @@ export default function PhotographerSummary(data) {
   photographerSummaryButton.classList.add('photographer-summary__contact')
   photographerSummaryButton.title = `Contacter ${data.name}`
   photographerSummaryButton.textContent = 'Contactez-moi'
+  photographerSummaryButton.setAttribute('aria-controls', 'modal-form')
 
   // Create photographer summary image wrapper
   const photographerSummaryImageWrapper = document.createElement('div')
@@ -58,6 +59,21 @@ export default function PhotographerSummary(data) {
     photographerSummaryButton,
     photographerSummaryImageWrapper
   )
+
+  // Function to open the modal form
+  function openModal() {
+    // Get the modal form element
+    const modal = document.querySelector('.modal-form')
+
+    // Open the modal form
+    modal.showModal()
+
+    // Disable the window scroll
+    document.body.style.overflow = 'hidden'
+  }
+
+  // Open the modal form when clicking on the button
+  photographerSummaryButton.addEventListener('click', openModal)
 
   return photographerSummary
 }
