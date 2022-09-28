@@ -123,6 +123,13 @@ export default function FilterMedias() {
     optionsGroup.append(optionElement)
   })
 
+  // When user press enter on current state element, focus the first option visible
+  currentState.addEventListener('keydown', event => {
+    if (event.key === 'Enter') {
+      optionsGroup.querySelector('.filter-medias__option:not([style*="display: none"])').focus()
+    }
+  })
+
   // Append current state and options group to the select element
   select.append(currentState, optionsGroup)
 

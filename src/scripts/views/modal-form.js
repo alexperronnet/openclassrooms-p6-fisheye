@@ -131,7 +131,7 @@ export default function ModalForm(data) {
   // Create the form success message text
   const formSuccessText = document.createElement('p')
   formSuccessText.classList.add('modal-form__success-text')
-  formSuccessText.textContent = `Merci pour l'intérêt que vous portez à photographerName. Ce photographe vous répondra dans les plus brefs délais.`
+  formSuccessText.textContent = `Merci pour l'intérêt que vous portez au travail de photographerName. Ce photographe vous répondra dans les plus brefs délais.`
 
   // Create photographer name
   const photographerName = document.createElement('span')
@@ -191,7 +191,7 @@ export default function ModalForm(data) {
     }
   })
   // Close the modal form on escape key press
-  document.addEventListener('keydown', event => {
+  modal.addEventListener('keydown', event => {
     if (event.key === 'Escape') {
       // Prevent default behavior
       event.preventDefault()
@@ -281,7 +281,7 @@ export default function ModalForm(data) {
       })
 
       // Close the modal form on escape key press
-      document.addEventListener('keydown', event => {
+      modal.addEventListener('keydown', event => {
         if (event.key === 'Escape') {
           // Prevent default behavior
           event.preventDefault()

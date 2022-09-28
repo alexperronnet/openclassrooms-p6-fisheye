@@ -4,13 +4,13 @@ export default function PhotographerMedias(data, filterMedias) {
   const photographerMedias = document.createElement('section')
   photographerMedias.classList.add('photographer-medias')
 
+  // Append filter medias
+  photographerMedias.append(filterMedias)
+
   // Create photographer medias grid
   const photographerMediasGrid = document.createElement('div')
   photographerMediasGrid.classList.add('medias-grid')
   photographerMediasGrid.dataset.sort = 'popularity'
-
-  // Append filter medias
-  photographerMedias.append(filterMedias)
 
   // Switch between medias type
   function SwitchMedia(media) {
@@ -18,11 +18,11 @@ export default function PhotographerMedias(data, filterMedias) {
     if (media.image) {
       // Create image element
       const image = document.createElement('img')
-      image.classList.add('media-card__image')
+      image.classList.add('media-card__media')
       image.src = media.image
       image.alt = media.title
-      image.title = media.title
       image.loading = 'lazy'
+      image.id = media.id
 
       // Return image
       return image
@@ -32,10 +32,10 @@ export default function PhotographerMedias(data, filterMedias) {
     if (media.video) {
       // Create video element
       const video = document.createElement('video')
-      video.classList.add('media-card__video')
+      video.classList.add('media-card__media')
       video.src = media.video
-      video.title = media.title
       video.muted = true
+      video.id = media.id
 
       // Return video
       return video
@@ -47,19 +47,20 @@ export default function PhotographerMedias(data, filterMedias) {
     // Create media element
     const mediaElement = document.createElement('article')
     mediaElement.classList.add('media-card')
-    mediaElement.id = media.id
+    mediaElement.dataset.for = media.id
 
     // Create media wrapper
-    const mediaWrapper = document.createElement('div')
-    mediaWrapper.classList.add('media-card__wrapper-media')
-    mediaWrapper.tabIndex = 0
+    const mediaWrapper = document.createElement('a')
+    mediaWrapper.classList.add('media-card__media-wrapper')
+    mediaWrapper.href = media.image || media.video
+    mediaWrapper.title = media.title
 
     // If media is a video
     if (media.video) {
       // Play the video when media wrapper is hovered or focused and stop it when it's not
       mediaWrapper.onmouseover = () => mediaWrapper.querySelector('video').play()
-      mediaWrapper.onmouseout = () => mediaWrapper.querySelector('video').pause()
       mediaWrapper.onfocus = () => mediaWrapper.querySelector('video').play()
+      mediaWrapper.onmouseout = () => mediaWrapper.querySelector('video').pause()
       mediaWrapper.onblur = () => mediaWrapper.querySelector('video').pause()
     }
 
