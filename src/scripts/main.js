@@ -8,7 +8,9 @@ import { Router } from '@controllers'
 import { GetData } from '@models'
 
 // Initialize the router
-Router(
-  // Get the data
-  GetData()
-)
+window.onload = () => {
+  Router(
+    // Get the data
+    GetData()
+  )
+}

@@ -3,8 +3,14 @@ import { CreatePages } from '@controllers'
 
 // Create the router
 export default function Router(data) {
-  // Render page on first load
+  // Create pages for all routes
   CreatePages(data)
+
+  // Listen for route changes
+  window.addEventListener('popstate', () => {
+    // Create pages for all routes
+    CreatePages(data)
+  })
 
   // Listen for click on internal links
   document.addEventListener('click', event => {
@@ -22,17 +28,11 @@ export default function Router(data) {
       // Check if the URL is different
       if (url.pathname !== window.location.pathname) {
         // Update the URL
-        window.history.pushState({}, '', url.pathname)
+        window.history.pushState({}, '', url)
 
         // Render the page
         CreatePages(data)
       }
     }
-  })
-
-  // Listen for popstate
-  window.addEventListener('popstate', () => {
-    // Render the page
-    CreatePages(data)
   })
 }
