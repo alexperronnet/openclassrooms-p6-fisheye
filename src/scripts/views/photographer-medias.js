@@ -13,13 +13,13 @@ export default function PhotographerMedias(data, filterMedias) {
   photographerMediasGrid.dataset.sort = 'popularity'
 
   // Switch between medias type
-  function SwitchMedia(media) {
+  function SwitchMedia(media, className, controls = false) {
     // If media is an image
     if (media.image) {
       // Create image element
       const image = document.createElement('img')
-      image.classList.add('media-card__media')
-      image.src = media.image
+      image.classList.add(className)
+      image.src = media.src
       image.alt = media.title
       image.loading = 'lazy'
       image.id = media.id
@@ -32,10 +32,10 @@ export default function PhotographerMedias(data, filterMedias) {
     if (media.video) {
       // Create video element
       const video = document.createElement('video')
-      video.classList.add('media-card__media')
-      video.src = media.video
-      video.muted = true
+      video.classList.add(className)
+      video.src = media.src
       video.id = media.id
+      video.controls = controls
 
       // Return video
       return video
@@ -47,13 +47,15 @@ export default function PhotographerMedias(data, filterMedias) {
     // Create media element
     const mediaElement = document.createElement('article')
     mediaElement.classList.add('media-card')
-    mediaElement.dataset.for = media.id
+    mediaElement.dataset.id = media.id
 
     // Create media wrapper
-    const mediaWrapper = document.createElement('a')
+    const mediaWrapper = document.createElement('div')
     mediaWrapper.classList.add('media-card__media-wrapper')
-    mediaWrapper.href = media.image || media.video
     mediaWrapper.title = media.title
+
+    // Append media to media wrapper
+    mediaWrapper.append(SwitchMedia(media, 'media-card__media'))
 
     // If media is a video
     if (media.video) {
@@ -62,10 +64,8 @@ export default function PhotographerMedias(data, filterMedias) {
       mediaWrapper.onfocus = () => mediaWrapper.querySelector('video').play()
       mediaWrapper.onmouseout = () => mediaWrapper.querySelector('video').pause()
       mediaWrapper.onblur = () => mediaWrapper.querySelector('video').pause()
+      mediaWrapper.querySelector('video').muted = true
     }
-
-    // Append media to media wrapper
-    mediaWrapper.append(SwitchMedia(media))
 
     // Create media infos
     const mediaInfo = document.createElement('div')
@@ -142,6 +142,14 @@ export default function PhotographerMedias(data, filterMedias) {
 
     // Append media element to photographer medias
     photographerMediasGrid.append(mediaElement)
+
+    // On click on media wrapper open lightbox and disable scroll
+    mediaWrapper.onclick = () => {
+      MediaLightbox(media)
+
+      // Disable scroll
+      document.body.style.overflow = 'hidden'
+    }
   }
 
   // Create media cards for each media and sort them by popularity by default
@@ -181,6 +189,173 @@ export default function PhotographerMedias(data, filterMedias) {
 
   // Append photographer medias grid to photographer medias
   photographerMedias.append(photographerMediasGrid)
+
+  // Manage Lightbox
+  function MediaLightbox(media) {
+    // Create lightbox element
+    const lightbox = document.createElement('div')
+    lightbox.classList.add('medias-lightbox')
+
+    // Create lightbox container
+    const lightboxContainer = document.createElement('div')
+    lightboxContainer.classList.add('medias-lightbox__container')
+
+    // Create close button
+    const closeButton = document.createElement('button')
+    closeButton.classList.add('medias-lightbox__close')
+    closeButton.title = 'Fermer la fenêtre'
+
+    // Create close icon
+    const closeIcon = document.createElement('img')
+    closeIcon.classList.add('medias-lightbox__close-icon')
+    closeIcon.src = 'assets/svgs/close-white.svg'
+    closeIcon.alt = 'Fermer la fenêtre'
+
+    // Append close icon to close button
+    closeButton.append(closeIcon)
+
+    // Create next button
+    const nextButton = document.createElement('button')
+    nextButton.classList.add('medias-lightbox__next')
+    nextButton.title = 'Voir le média suivant'
+
+    // Create next icon
+    const nextIcon = document.createElement('img')
+    nextIcon.classList.add('medias-lightbox__next-icon')
+    nextIcon.src = 'assets/svgs/chevron-white.svg'
+    nextIcon.alt = 'Voir le média suivant'
+
+    // Append next icon to next button
+    nextButton.append(nextIcon)
+
+    // Create previous button
+    const previousButton = document.createElement('button')
+    previousButton.classList.add('medias-lightbox__previous')
+    previousButton.title = 'Voir le média précédent'
+
+    // Create previous icon
+    const previousIcon = document.createElement('img')
+    previousIcon.classList.add('medias-lightbox__previous-icon')
+    previousIcon.src = 'assets/svgs/chevron-white.svg'
+    previousIcon.alt = 'Voir le média précédent'
+
+    // Append previous icon to previous button
+    previousButton.append(previousIcon)
+
+    // Create content
+    const content = document.createElement('div')
+    content.classList.add('medias-lightbox__content')
+
+    // Create media wrapper
+    const lightboxMediaWrapper = document.createElement('div')
+    lightboxMediaWrapper.classList.add('medias-lightbox__media-wrapper')
+
+    // Append media to media wrapper
+    lightboxMediaWrapper.append(SwitchMedia(media, 'medias-lightbox__media', true))
+
+    // Create media title
+    const mediaTitle = document.createElement('h3')
+    mediaTitle.classList.add('medias-lightbox__media-title')
+    mediaTitle.textContent = media.title
+
+    // Append media wrapper and media title to content
+    content.append(lightboxMediaWrapper, mediaTitle)
+
+    // Append close button, next button, previous button and content to lightbox container
+    lightboxContainer.append(closeButton, previousButton, content, nextButton)
+
+    // Append lightbox container to lightbox
+    lightbox.append(lightboxContainer)
+
+    // Append lightbox photographer medias
+    photographerMedias.append(lightbox)
+
+    // Close lightbox
+    function CloseLightbox() {
+      // Remove lightbox
+      lightbox.remove()
+
+      // Enable scroll
+      document.body.style.overflow = 'auto'
+    }
+
+    // Close lightbox on click
+    closeButton.onclick = CloseLightbox
+
+    // Close lightbox on escape key
+    document.addEventListener('keydown', event => {
+      if (event.key === 'Escape') {
+        CloseLightbox()
+      }
+    })
+
+    const mediasArray = data.mediasSort[photographerMediasGrid.dataset.sort]
+
+    // Next media
+    function NextMedia() {
+      // Get current media index
+      const currentMediaIndex = mediasArray.indexOf(media)
+
+      // Get next media index
+      const nextMediaIndex = currentMediaIndex + 1 < mediasArray.length ? currentMediaIndex + 1 : 0
+
+      // Get next media
+      const nextMedia = mediasArray[nextMediaIndex]
+
+      // Update media
+      media = nextMedia
+
+      // Update media title
+      mediaTitle.textContent = media.title
+
+      // Update media wrapper
+      lightboxMediaWrapper.innerHTML = ''
+      lightboxMediaWrapper.append(SwitchMedia(media, 'medias-lightbox__media', true))
+    }
+
+    // Next media on click
+    nextButton.onclick = NextMedia
+
+    // Next media on right arrow key
+    document.addEventListener('keydown', event => {
+      if (event.key === 'ArrowRight') {
+        NextMedia()
+      }
+    })
+
+    // Previous media
+    function PreviousMedia() {
+      // Get current media index
+      const currentMediaIndex = mediasArray.indexOf(media)
+
+      // Get previous media index
+      const previousMediaIndex =
+        currentMediaIndex - 1 >= 0 ? currentMediaIndex - 1 : mediasArray.length - 1
+
+      // Get previous media
+      const previousMedia = mediasArray[previousMediaIndex]
+
+      // Update media
+      media = previousMedia
+
+      // Update media title
+      mediaTitle.textContent = media.title
+
+      // Update media wrapper
+      lightboxMediaWrapper.innerHTML = ''
+      lightboxMediaWrapper.append(SwitchMedia(media, 'medias-lightbox__media', true))
+    }
+
+    // Previous media on click
+    previousButton.onclick = PreviousMedia
+
+    // Previous media on left arrow key
+    document.addEventListener('keydown', event => {
+      if (event.key === 'ArrowLeft') {
+        PreviousMedia()
+      }
+    })
+  }
 
   // Return photographer medias
   return photographerMedias

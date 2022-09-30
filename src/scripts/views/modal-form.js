@@ -22,6 +22,7 @@ export default function ModalForm(data) {
   modalClose.classList.add('modal-form__close')
   modalClose.type = 'button'
   modalClose.title = 'Fermer la fenêtre'
+  modalClose.setAttribute('aria-controls', 'modal-form')
 
   // Create modal form close icon
   const modalCloseIcon = document.createElement('img')

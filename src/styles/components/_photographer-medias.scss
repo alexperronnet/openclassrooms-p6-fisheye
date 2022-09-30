@@ -1,6 +1,7 @@
 // Forward components for photographer medias
 @forward '@styles/components/filter-medias';
 @forward '@styles/components/medias-grid';
+@forward '@styles/components/lightbox';
 
 .photographer-medias {
   display: flex;

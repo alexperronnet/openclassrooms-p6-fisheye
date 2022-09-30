@@ -60,3 +60,14 @@
     transform: translateY(-100%);
   }
 }
+
+@keyframes media-scale {
+  0% {
+    filter: blur(0.5rem);
+    transform: scale(1.2);
+  }
+  100% {
+    filter: blur(0);
+    transform: scale(1);
+  }
+}

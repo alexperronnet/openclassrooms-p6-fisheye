@@ -25,13 +25,13 @@ export default function GetData() {
       // Filter medias by type
       if (media.image) {
         // get the media image by replacing the extension
-        media.image = `/assets/medias/${photographer.id}/images/${media.image.replace(
+        media.src = `/assets/medias/${photographer.id}/images/${media.image.replace(
           '.jpg',
           '.webp'
         )}`
       } else if (media.video) {
         // get the media video
-        media.video = `/assets/medias/${photographer.id}/videos/${media.video}`
+        media.src = `/assets/medias/${photographer.id}/videos/${media.video}`
       }
     })
 
