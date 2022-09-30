@@ -53,6 +53,7 @@ export default function PhotographerMedias(data, filterMedias) {
     const mediaWrapper = document.createElement('div')
     mediaWrapper.classList.add('media-card__media-wrapper')
     mediaWrapper.title = media.title
+    mediaWrapper.tabIndex = 0
 
     // Append media to media wrapper
     mediaWrapper.append(SwitchMedia(media, 'media-card__media'))
@@ -149,6 +150,16 @@ export default function PhotographerMedias(data, filterMedias) {
 
       // Disable scroll
       document.body.style.overflow = 'hidden'
+    }
+
+    // On keydown on media wrapper open lightbox and disable scroll
+    mediaWrapper.onkeydown = e => {
+      if (e.key === 'Enter') {
+        MediaLightbox(media)
+
+        // Disable scroll
+        document.body.style.overflow = 'hidden'
+      }
     }
   }
 
