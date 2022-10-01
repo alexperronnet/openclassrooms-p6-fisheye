@@ -46,6 +46,10 @@
   transition-property: opacity;
 }
 
+.media-card__media-wrapper:focus-visible {
+  outline: 0.4rem solid lighten($color-red, 10%);
+}
+
 .media-card__media-wrapper:focus-visible::after {
   opacity: 1;
 }
@@ -113,9 +117,15 @@
   cursor: pointer;
 }
 
-.media-card__likes-button:is(:hover, :focus-visible) .media-card__likes-icon {
+.media-card__likes-button:hover .media-card__likes-icon {
   opacity: 0.75;
   transform: rotate(15deg);
+}
+
+.media-card__likes-button:focus-visible {
+  border-radius: $border-radius;
+  outline: 0.2rem solid lighten($color-red, 10%);
+  outline-offset: 0.1rem;
 }
 
 .media-card__likes-icon {

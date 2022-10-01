@@ -16,6 +16,8 @@
 .header__link {
   color: $color-red;
   position: relative;
+  transition: $transition;
+  transition-property: filter;
 }
 
 .header__link::after {
@@ -34,6 +36,10 @@
 
 .header__link:focus-visible {
   outline: none;
+}
+
+.header__link:is(:hover, :focus-visible) {
+  filter: brightness(1.5);
 }
 
 .header__link:is(:hover, :focus-visible)::after {
