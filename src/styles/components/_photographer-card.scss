@@ -59,7 +59,7 @@
 .photographer-card__name {
   font-size: 2rem;
   font-weight: 400;
-  color: $color-coral;
+  color: darken($color-coral, 10%);
   position: relative;
 }
 

@@ -9,7 +9,7 @@ export default function PhotographerAside(data) {
   photographerAsideLikes.classList.add('photographer-aside__likes')
 
   // Create photographer aside likes count and add sum of likes to it
-  const photographerAsideLikesCount = document.createElement('p')
+  const photographerAsideLikesCount = document.createElement('span')
   photographerAsideLikesCount.classList.add('photographer-aside__likes-count')
   photographerAsideLikesCount.textContent = data.medias.reduce((sum, media) => sum + media.likes, 0)
 
@@ -17,7 +17,7 @@ export default function PhotographerAside(data) {
   const photographerAsideLikesIcon = document.createElement('img')
   photographerAsideLikesIcon.classList.add('photographer-aside__likes-icon')
   photographerAsideLikesIcon.src = '/assets/svgs/heart-black.svg'
-  photographerAsideLikesIcon.alt = "J'aime"
+  photographerAsideLikesIcon.alt = 'Icône de coeur'
   photographerAsideLikesIcon.title = 'Total des likes'
 
   // Append photographer aside likes count and icon to likes

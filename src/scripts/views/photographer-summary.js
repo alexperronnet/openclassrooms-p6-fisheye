@@ -18,7 +18,7 @@ export default function PhotographerSummary(data) {
   photographerSummaryInfos.classList.add('photographer-summary__infos')
 
   // Create photographer summary location
-  const photographerSummaryLocation = document.createElement('p')
+  const photographerSummaryLocation = document.createElement('h2')
   photographerSummaryLocation.classList.add('photographer-summary__location')
   photographerSummaryLocation.textContent = `${data.city}, ${data.country}`
 

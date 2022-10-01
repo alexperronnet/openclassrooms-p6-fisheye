@@ -20,7 +20,7 @@ export default function PhotographerMedias(data, filterMedias) {
       const image = document.createElement('img')
       image.classList.add(className)
       image.src = media.src
-      image.alt = media.title
+      image.alt = 'Représentation du média ' + media.title
       image.loading = 'lazy'
       image.id = media.id
 
