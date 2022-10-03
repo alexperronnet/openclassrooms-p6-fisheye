@@ -3,7 +3,7 @@ import { CreatePages } from '@controllers'
 
 // Create the router
 export default function Router(data) {
-  // Create pages for all routes
+  // Create all pages on load
   CreatePages(data)
 
   // Listen for route changes
