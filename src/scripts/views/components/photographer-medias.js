@@ -13,7 +13,7 @@ export default function PhotographerMedias(data, filterMedias) {
   photographerMediasGrid.dataset.sort = 'popularity'
 
   // Switch between medias type
-  function SwitchMedia(media, className, controls = false) {
+  const SwitchMedia = (media, className, controls = false) => {
     // If media is an image
     if (media.image) {
       // Create image element
@@ -43,7 +43,7 @@ export default function PhotographerMedias(data, filterMedias) {
   }
 
   // Manage media card
-  function MediaCard(media) {
+  const MediaCard = media => {
     // Create media element
     const mediaElement = document.createElement('article')
     mediaElement.classList.add('media-card')
@@ -144,21 +144,39 @@ export default function PhotographerMedias(data, filterMedias) {
     // Append media element to photographer medias
     photographerMediasGrid.append(mediaElement)
 
-    // On click on media wrapper open lightbox and disable scroll
-    mediaWrapper.onclick = () => {
+    // Manage lightbox opening
+    const OpenLightbox = () => {
+      // Create lightbox element
       MediaLightbox(media)
 
       // Disable scroll
       document.body.style.overflow = 'hidden'
+
+      // Focusable elements
+      const focusableElements = document.querySelectorAll(
+        'a, button, [tabindex]:not([tabindex="-1"])'
+      )
+
+      // Disable focus on focusable elements
+      focusableElements.forEach(element => {
+        element.setAttribute('tabindex', '-1')
+      })
+
+      // Enable focus on lightbox
+      document.querySelector('.medias-lightbox__close').setAttribute('tabindex', '0')
+      document.querySelector('.medias-lightbox__previous').setAttribute('tabindex', '0')
+      document.querySelector('.medias-lightbox__next').setAttribute('tabindex', '0')
+    }
+
+    // On click on media wrapper open lightbox and disable scroll
+    mediaWrapper.onclick = () => {
+      OpenLightbox()
     }
 
     // On keydown on media wrapper open lightbox and disable scroll
-    mediaWrapper.onkeydown = e => {
-      if (e.key === 'Enter') {
-        MediaLightbox(media)
-
-        // Disable scroll
-        document.body.style.overflow = 'hidden'
+    mediaWrapper.onkeydown = event => {
+      if (event.key === 'Enter') {
+        OpenLightbox()
       }
     }
   }
@@ -202,7 +220,7 @@ export default function PhotographerMedias(data, filterMedias) {
   photographerMedias.append(photographerMediasGrid)
 
   // Manage Lightbox
-  function MediaLightbox(media) {
+  const MediaLightbox = media => {
     // Create lightbox element
     const lightbox = document.createElement('div')
     lightbox.classList.add('medias-lightbox')
@@ -282,12 +300,22 @@ export default function PhotographerMedias(data, filterMedias) {
     photographerMedias.append(lightbox)
 
     // Close lightbox
-    function CloseLightbox() {
+    const CloseLightbox = () => {
       // Remove lightbox
       lightbox.remove()
 
       // Enable scroll
       document.body.style.overflow = 'auto'
+
+      // Focusable elements
+      const focusableElements = document.querySelectorAll(
+        'a, button, [tabindex]:not([tabindex="0"])'
+      )
+
+      // Enable focus on focusable elements
+      focusableElements.forEach(element => {
+        element.setAttribute('tabindex', '0')
+      })
     }
 
     // Close lightbox on click
@@ -300,70 +328,60 @@ export default function PhotographerMedias(data, filterMedias) {
       }
     })
 
-    const mediasArray = data.mediasSort[photographerMediasGrid.dataset.sort]
+    // If direction is next browse medias in clockwise direction else browse medias in counter clockwise direction
+    const BrowseMedia = direction => {
+      const mediasArray = data.mediasSort[photographerMediasGrid.dataset.sort]
 
-    // Next media
-    function NextMedia() {
       // Get current media index
       const currentMediaIndex = mediasArray.indexOf(media)
 
-      // Get next media index
-      const nextMediaIndex = currentMediaIndex + 1 < mediasArray.length ? currentMediaIndex + 1 : 0
+      // If direction is next
+      if (direction === 'next') {
+        // If current media index is the last media index
+        if (currentMediaIndex === mediasArray.length - 1) {
+          // Set media to first media
+          media = mediasArray[0]
+        } else {
+          // Set media to next media
+          media = mediasArray[currentMediaIndex + 1]
+        }
+      }
 
-      // Get next media
-      const nextMedia = mediasArray[nextMediaIndex]
+      // If direction is previous
+      if (direction === 'previous') {
+        // If current media index is the first media index
+        if (currentMediaIndex === 0) {
+          // Set media to last media
+          media = mediasArray[mediasArray.length - 1]
+        } else {
+          // Set media to previous media
+          media = mediasArray[currentMediaIndex - 1]
+        }
+      }
 
-      // Update media
-      media = nextMedia
-
-      // Update media title
-      mediaTitle.textContent = media.title
-
-      // Update media wrapper
+      // Remove current media from media wrapper
       lightboxMediaWrapper.innerHTML = ''
+
+      // Append new media to media wrapper
       lightboxMediaWrapper.append(SwitchMedia(media, 'medias-lightbox__media', true))
+
+      // Set media title
+      mediaTitle.textContent = media.title
     }
 
-    // Next media on click
-    nextButton.onclick = NextMedia
-
-    // Next media on right arrow key
+    // Next media on click or right arrow key
+    nextButton.onclick = () => BrowseMedia('next')
     document.addEventListener('keydown', event => {
       if (event.key === 'ArrowRight') {
-        NextMedia()
+        BrowseMedia('next')
       }
     })
 
-    // Previous media
-    function PreviousMedia() {
-      // Get current media index
-      const currentMediaIndex = mediasArray.indexOf(media)
-
-      // Get previous media index
-      const previousMediaIndex =
-        currentMediaIndex - 1 >= 0 ? currentMediaIndex - 1 : mediasArray.length - 1
-
-      // Get previous media
-      const previousMedia = mediasArray[previousMediaIndex]
-
-      // Update media
-      media = previousMedia
-
-      // Update media title
-      mediaTitle.textContent = media.title
-
-      // Update media wrapper
-      lightboxMediaWrapper.innerHTML = ''
-      lightboxMediaWrapper.append(SwitchMedia(media, 'medias-lightbox__media', true))
-    }
-
-    // Previous media on click
-    previousButton.onclick = PreviousMedia
-
-    // Previous media on left arrow key
+    // Previous media on click or left arrow key
+    previousButton.onclick = () => BrowseMedia('previous')
     document.addEventListener('keydown', event => {
       if (event.key === 'ArrowLeft') {
-        PreviousMedia()
+        BrowseMedia('previous')
       }
     })
   }

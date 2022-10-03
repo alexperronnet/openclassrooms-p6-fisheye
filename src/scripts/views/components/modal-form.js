@@ -163,7 +163,7 @@ export default function ModalForm(data) {
   modal.append(modalWrapper)
 
   // Function to close the modal form
-  function closeModal() {
+  const closeModal = () => {
     // Set is-closing attribute
     modal.setAttribute('is-closing', '')
 
@@ -210,7 +210,7 @@ export default function ModalForm(data) {
   }
 
   // Check if each input are valid
-  function checkInputs() {
+  const checkInputs = () => {
     // Get all inputs
     const inputs = form.querySelectorAll('.modal-form__field-input')
 
@@ -231,7 +231,7 @@ export default function ModalForm(data) {
   }
 
   // Reset the form
-  function resetForm() {
+  const resetForm = () => {
     closeModal()
 
     setTimeout(() => {

@@ -21,7 +21,7 @@ export default function FilterMedias() {
   currentState.setAttribute('aria-controls', 'filter-medias__options-group')
 
   // Close options
-  function openOptions() {
+  const openOptions = () => {
     // Expand the current state
     currentState.setAttribute('aria-expanded', 'true')
     // Show the options
@@ -29,14 +29,14 @@ export default function FilterMedias() {
   }
 
   // Open options
-  function closeOptions() {
+  const closeOptions = () => {
     // Hide the options
     currentState.setAttribute('aria-expanded', 'false')
     optionsGroup.setAttribute('aria-hidden', 'true')
   }
 
   // Mange toggle state
-  function toggleState() {
+  const toggleState = () => {
     if (currentState.getAttribute('aria-expanded') === 'true') {
       closeOptions()
     } else {
@@ -90,7 +90,7 @@ export default function FilterMedias() {
     }
 
     // Select an option
-    function selectOption() {
+    const selectOption = () => {
       // Remove aria-selected attribute from all options
       optionsGroup
         .querySelectorAll('.filter-medias__option')

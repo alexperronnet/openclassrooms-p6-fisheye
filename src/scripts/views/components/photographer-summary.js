@@ -61,7 +61,7 @@ export default function PhotographerSummary(data) {
   )
 
   // Function to open the modal form
-  function openModal() {
+  const openModal = () => {
     // Get the modal form element
     const modal = document.querySelector('.modal-form')
 
