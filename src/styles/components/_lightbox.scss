@@ -20,6 +20,10 @@
   position: relative;
   max-width: 80rem;
   width: 100%;
+
+  @media (max-width: $screen-md) {
+    gap: 1rem;
+  }
 }
 
 .medias-lightbox__close {
@@ -41,11 +45,19 @@
   align-items: center;
   justify-content: center;
 
+  @media (max-width: $screen-md) {
+    min-width: 4rem;
+  }
+
   &-icon {
     width: 3rem;
     opacity: 0.5;
     transition: $transition;
     transition-property: transform, opacity;
+
+    @media (max-width: $screen-md) {
+      width: 2rem;
+    }
   }
 
   &:focus-visible {
